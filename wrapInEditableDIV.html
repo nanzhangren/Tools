@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+<title>sample</title>
+<script src='jquery-2.1.1.min.js'></script>
+</head>
+
+<body>
+<div id="bbb" contenteditable="true" onkeydown="test()" style="ime-mode: auto; display: table-cell; float: left; width: 200px; height: 600px; background-color: lightblue;">auto</div>
+
+<script type="text/javascript">
+
+    element = $("#bbb")[0];
+    // element.textContent = 'Hello Hello';
+    element.innerText = 'Hello\nworld';
+
+    function test(e) {
+        var ev = e || window.event;
+        var key = ev.keyCode || ev.charCode;
+        if (key == 13) {
+            var br = document.createElement('br');
+            var selection = window.getSelection();
+            var range = selection.getRangeAt(0);
+
+            var tempRange = range.cloneRange();
+            tempRange.selectNodeContents(element);
+            tempRange.setEnd(range.endContainer, range.endOffset);
+            var offset = tempRange.toString().length;
+            //在行尾且不存在<br type='_moz'>時
+            if(offset == element.textContent.length && element.querySelectorAll("br[type='_moz']").length == 0) {
+                var fixbr = br.cloneNode();
+                fixbr.setAttribute('type', '_moz');
+                range.insertNode(fixbr);
+            }
+            range.insertNode(br);
+
+            tempRange = document.createRange();
+            tempRange.selectNodeContents(element);
+            tempRange.setStart(range.endContainer, range.endOffset);
+            tempRange.setEnd(range.endContainer, range.endOffset);
+            selection.removeAllRanges();
+            selection.addRange(tempRange);
+
+
+            if(ev.preventDefault) {
+                ev.preventDefault();
+            } else {
+                ev.returnValue = false;
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
