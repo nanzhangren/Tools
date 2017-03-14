@@ -81,8 +81,7 @@ function convertKeyCodeToAsciiCode(event) {
         107: 43,    // + in number pad
         109: 45,    // - in number pad
         110: 46,    // . in number pad
-        111: 47,    // / in number pad
-        173: 45     // - When in Firefore 15 press minus key, the keyCode is 173
+        111: 47     // / in number pad
     }, generalKeyMap = {
         186: 59,    // ;
         187: 61,    // =
@@ -124,6 +123,5 @@ function convertKeyCodeToAsciiCode(event) {
     //    A ~ Z  =>  65 ~ 90
     //    0 ~ 9  =>  48 ~ 57 (number in letter pad)
     //    space  =>  32
-    //    =      =>  61 // When in Firefore 15 and Opera, press equal key, the keyCode is 61
     return retCode;
 }
