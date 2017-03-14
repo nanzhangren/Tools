@@ -75,55 +75,55 @@ function isEqualObject(obj1, obj2, compareObjectFieldFunc) {
 // 2. convertKeyCodeToAsciiCode
 // Convert keyCode in event to the ASCII code.
 function convertKeyCodeToAsciiCode(event) {
-	var keyCode = event.keyCode, shiftKey = event.shiftKey;
-	var keyMap = {
-		106: 42,    // * in number pad
-		107: 43,    // + in number pad
-		109: 45,    // - in number pad
-		110: 46,    // . in number pad
-		111: 47,    // / in number pad
-		173: 45     // - When in Firefore 15 press minus key, the keyCode is 173
-	}, generalKeyMap = {
-		186: 59,    // ;
-		187: 61,    // =
-		188: 44,    // ,
-		189: 45,    // -
-		190: 46,    // .
-		191: 47,    // /
-		192: 96,    // `
-		219: 91,    // [
-		220: 92,    // \
-		221: 93,    // ]
-		222: 39     // '
-	}, shiftKeyMap = {
-		186: 58,    // :
-		187: 43,    // +
-		188: 60,    // <
-		189: 95,    // _
-		190: 62,    // >
-		191: 63,    // ?
-		192: 126,   // ~
-		219: 123,   // {
-		220: 124,   // |
-		221: 125,   // }
-		222: 34     // "
-	};
-	var retCode = keyCode;
-	if(keyCode >= 96 && keyCode <= 105) {    // 0 ~ 9 in number pad
-		retCode = keyCode - 48;
-	} else if(keyMap[keyCode]) {
-		retCode = keyMap[keyCode];
-	} else if (shiftKey && shiftKeyMap[keyCode]) {
-		retCode = shiftKeyMap[keyCode];
-	} else if(!shiftKey && generalKeyMap[keyCode]) {
-		retCode = generalKeyMap[keyCode];
-	} else if(!shiftKey && keyCode >= 65 && keyCode <= 90) {    // eslint-disable-line      // a~z
-		retCode = keyCode + 32;
-	}
-	// KeyCode is same with ASCII letter:
-	//    A ~ Z  =>  65 ~ 90
-	//    0 ~ 9  =>  48 ~ 57 (number in letter pad)
-	//    space  =>  32
-	//    =      =>  61 // When in Firefore 15 and Opera, press equal key, the keyCode is 61
-	return retCode;
+    var keyCode = event.keyCode, shiftKey = event.shiftKey;
+    var keyMap = {
+        106: 42,    // * in number pad
+        107: 43,    // + in number pad
+        109: 45,    // - in number pad
+        110: 46,    // . in number pad
+        111: 47,    // / in number pad
+        173: 45     // - When in Firefore 15 press minus key, the keyCode is 173
+    }, generalKeyMap = {
+        186: 59,    // ;
+        187: 61,    // =
+        188: 44,    // ,
+        189: 45,    // -
+        190: 46,    // .
+        191: 47,    // /
+        192: 96,    // `
+        219: 91,    // [
+        220: 92,    // \
+        221: 93,    // ]
+        222: 39     // '
+    }, shiftKeyMap = {
+        186: 58,    // :
+        187: 43,    // +
+        188: 60,    // <
+        189: 95,    // _
+        190: 62,    // >
+        191: 63,    // ?
+        192: 126,   // ~
+        219: 123,   // {
+        220: 124,   // |
+        221: 125,   // }
+        222: 34     // "
+    };
+    var retCode = keyCode;
+    if(keyCode >= 96 && keyCode <= 105) {    // 0 ~ 9 in number pad
+        retCode = keyCode - 48;
+    } else if(keyMap[keyCode]) {
+        retCode = keyMap[keyCode];
+    } else if (shiftKey && shiftKeyMap[keyCode]) {
+        retCode = shiftKeyMap[keyCode];
+    } else if(!shiftKey && generalKeyMap[keyCode]) {
+        retCode = generalKeyMap[keyCode];
+    } else if(!shiftKey && keyCode >= 65 && keyCode <= 90) {    // eslint-disable-line      // a~z
+        retCode = keyCode + 32;
+    }
+    // KeyCode is same with ASCII letter:
+    //    A ~ Z  =>  65 ~ 90
+    //    0 ~ 9  =>  48 ~ 57 (number in letter pad)
+    //    space  =>  32
+    //    =      =>  61 // When in Firefore 15 and Opera, press equal key, the keyCode is 61
+    return retCode;
 }
