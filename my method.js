@@ -130,33 +130,33 @@ function convertKeyCodeToAsciiCode(event) {
 // Get the value of a field in an object.
 // You can also specify the parent name of a field for getting a more accuracy field value.
 function getFieldValueInComplexObject(obj, parentFieldName, fieldName, currentParentName) {
-	if(!obj || !(obj instanceof Object)) {
-		return null;
-	}
-	for(var prop in obj) {
-		if(obj.hasOwnProperty(prop)) {
-			var value = obj[prop];
-			if((!parentFieldName || parentFieldName === currentParentName) && prop === fieldName) {
-				return value;
-			} 
-			if(value instanceof Array) {
-				var retValue = null;
-				value.some(function(item) {
-					retValue = getFieldValueInComplexObject(item, parentFieldName, fieldName, prop);
-					if(retValue !== null) {
-						return true;
-					}
-				});
-				if(retValue !== null) {
-					return retValue;
-				}
-			} else if(value instanceof Object) {
-				var innerValue = getFieldValueInComplexObject(value, parentFieldName, fieldName, prop);
-				if(innerValue !== null) {
-					return innerValue;
-				}
-			}
-		}
-	}
-	return null;
+    if(!obj || !(obj instanceof Object)) {
+        return null;
+    }
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            var value = obj[prop];
+            if((!parentFieldName || parentFieldName === currentParentName) && prop === fieldName) {
+                return value;
+            }
+            if(value instanceof Array) {
+                var retValue = null;
+                value.some(function(item) {
+                    retValue = getFieldValueInComplexObject(item, parentFieldName, fieldName, prop);
+                    if(retValue !== null) {
+                        return true;
+                    }
+                });
+                if(retValue !== null) {
+                    return retValue;
+                }
+            } else if(value instanceof Object) {
+                var innerValue = getFieldValueInComplexObject(value, parentFieldName, fieldName, prop);
+                if(innerValue !== null) {
+                    return innerValue;
+                }
+            }
+        }
+    }
+    return null;
 }
